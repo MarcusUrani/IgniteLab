@@ -4,6 +4,7 @@ import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { useCreateSubscriberMutation } from "../graphql/generated";
 import { Loading } from "../components/Loading";
+import CodeMockup from "../assets/code-mockup.png";
 
 export function Subscribe() {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ export function Subscribe() {
         </div>
       </div>
       <img
-        src="/src/assets/code-mockup.png"
+        src={CodeMockup}
         alt="Print de uma seção de código em um editor"
         className="mt-10"
       />
