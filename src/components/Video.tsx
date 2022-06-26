@@ -3,6 +3,7 @@ import { DefaultUi, Player, Youtube } from "@vime/react";
 import { DiscordLogo, Lightning } from "phosphor-react";
 import "@vime/core/themes/default.css";
 import { useGetLessonBySlugQuery } from "../graphql/generated";
+import { Loading } from "./Loading";
 
 interface VideoProps {
   lessonSlug: string;
@@ -18,8 +19,8 @@ export function Video(props: VideoProps) {
 
   if (!data || !data.lesson) {
     return (
-      <div className="flex-1">
-        <h1>Carregando...</h1>
+      <div className="flex-1 items-center justify-center">
+        <Loading />
       </div>
     );
   }

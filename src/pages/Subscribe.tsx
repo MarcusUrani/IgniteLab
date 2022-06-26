@@ -3,6 +3,7 @@ import { useState, FormEvent } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { useCreateSubscriberMutation } from "../graphql/generated";
+import { Loading } from "../components/Loading";
 
 export function Subscribe() {
   const navigate = useNavigate();
@@ -62,7 +63,13 @@ export function Subscribe() {
               disabled={loading}
               className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
             >
-              Garantir minha vaga
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <Loading />
+                </div>
+              ) : (
+                "Garantir minha vaga"
+              )}
             </button>
           </form>
         </div>
