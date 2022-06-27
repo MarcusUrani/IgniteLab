@@ -1,7 +1,7 @@
 import { CheckCircle, Lock } from "phosphor-react";
 import { isPast, format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 interface LessonProps {
   title: string;
@@ -12,6 +12,7 @@ interface LessonProps {
 
 export function Lesson(props: LessonProps) {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const isActiveLesson = slug === props.slug;
 
   const isLessonAvailable = isPast(props.availableAt);
@@ -22,10 +23,11 @@ export function Lesson(props: LessonProps) {
   );
 
   return (
-    <Link
-      to={`/event/lesson/${props.slug}`}
+    <button
       className="group"
+      disabled={!isLessonAvailable}
       onClick={() => {
+        navigate(`/event/lesson/${props.slug}`);
         window.scroll({
           top: 0,
           left: 0,
@@ -33,9 +35,11 @@ export function Lesson(props: LessonProps) {
         });
       }}
     >
-      <span className="text-gray-300">{availableDateFormatted}</span>
+      <span className="text-gray-300 flex items-start">
+        {availableDateFormatted}
+      </span>
       <div
-        className={`rounded border border-gray-500 p-4 mt-2 group-hover:border-green-500 transition-colors ${
+        className={`rounded border border-gray-500 p-4 mt-2 group-disabled:opacity-5 group-hover:border-green-500 transition-colors ${
           isActiveLesson ? "bg-green-500 " : ""
         }`}
       >
@@ -64,13 +68,13 @@ export function Lesson(props: LessonProps) {
           </span>
         </header>
         <strong
-          className={`mt-5 block ${
+          className={`mt-5 block text-start ${
             isActiveLesson ? "text-white" : "text-gray-200"
           }`}
         >
           {props.title}
         </strong>
       </div>
-    </Link>
+    </button>
   );
 }

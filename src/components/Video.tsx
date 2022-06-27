@@ -19,9 +19,11 @@ export function Video(props: VideoProps) {
 
   if (!data || !data.lesson) {
     return (
-      <div className="flex-1 items-center justify-center">
-        <Loading />
-      </div>
+      <section className="flex-1">
+        <div className="flex justify-center items-center">
+          <Loading />
+        </div>
+      </section>
     );
   }
 
@@ -62,14 +64,16 @@ export function Video(props: VideoProps) {
           </div>
           <div className="flex flex-col gap-4">
             <a
-              href=""
+              href="https://discord.com/invite/rocketseat"
+              target={"_blank"}
+              rel="noreferrer"
               className="p-4 text-sm bg-green-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-green-700 transition-colors"
             >
               <DiscordLogo size={24} />
               Comunidade do discord
             </a>
             <a
-              href=""
+              href="/"
               className="p-4 text-sm border border-blue-500 text-blue-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-blue-500 hover:text-gray-900 transition-colors"
             >
               <Lightning size={24} />
