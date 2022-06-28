@@ -1,9 +1,10 @@
-import { CaretRight, FileArrowDown } from "phosphor-react";
 import { DefaultUi, Player, Youtube } from "@vime/react";
 import { DiscordLogo, Lightning } from "phosphor-react";
 import "@vime/core/themes/default.css";
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 import { Loading } from "./Loading";
+import { ComplementButtons } from "./ComplementButtons";
+import { TeacherSection } from "./TeacherSection";
 
 interface VideoProps {
   lessonSlug: string;
@@ -45,21 +46,11 @@ export function Video(props: VideoProps) {
               {data.lesson.description}
             </p>
             {data.lesson.teacher && (
-              <section className="flex items-center gap-4 mt-6">
-                <img
-                  className="h-16 w-16 rounded-full border-2 border-blue-500"
-                  src={data.lesson.teacher.avatarURL}
-                  alt="Ícone de usuário do instrutor da aula"
-                />
-                <div className="leading-relaxed">
-                  <strong className="text-bold text-2xl block">
-                    {data.lesson.teacher.name}
-                  </strong>
-                  <span className="text-gray-200 text-sm">
-                    {data.lesson.teacher.bio}
-                  </span>
-                </div>
-              </section>
+              <TeacherSection
+                avatarURL={data.lesson.teacher.avatarURL}
+                bio={data.lesson.teacher.bio}
+                name={data.lesson.teacher.name}
+              />
             )}
           </div>
           <div className="flex flex-col gap-4">
@@ -79,48 +70,9 @@ export function Video(props: VideoProps) {
               <Lightning size={24} />
               Acesse o desafio
             </a>
-          </div>{" "}
+          </div>
         </section>
-        <section className="gap-8 mt-20 grid grid-cols-2">
-          <a
-            href=""
-            className="bg-gray-700 rounded overflow-hidden flex items-stretch gap-6 hover:bg-gray-600 transition-colors"
-          >
-            <div className="bg-green-700 h-full flex p-6 items-center">
-              <FileArrowDown size={40} />
-            </div>
-            <div className="py-6 leading-relaxed">
-              <strong className="text-2xl font-bold">
-                Material complementar
-              </strong>
-              <p className="text-sm text-gray-200 mt-2">
-                Acesse o material complementar para acelerar seu desenvolvimento
-              </p>
-            </div>
-            <div className="h-full p-6 flex items-center">
-              <CaretRight size={24} />
-            </div>
-          </a>
-          <a
-            href=""
-            className="bg-gray-700 rounded overflow-hidden flex items-stretch gap-6 hover:bg-gray-600 transition-colors"
-          >
-            <div className="bg-green-700 h-full flex p-6 items-center">
-              <FileArrowDown size={40} />
-            </div>
-            <div className="py-6 leading-relaxed">
-              <strong className="text-2xl font-bold">
-                Wallpapers exclusivos
-              </strong>
-              <p className="text-sm text-gray-200 mt-2">
-                Baixe wallpapers exclusivos do Ignite Lab para sua máquina
-              </p>
-            </div>
-            <div className="h-full p-6 flex items-center">
-              <CaretRight size={24} />
-            </div>
-          </a>
-        </section>
+        <ComplementButtons />
       </section>
     </section>
   );
